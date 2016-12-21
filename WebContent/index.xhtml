@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head></h:head>
+<h:body>
+	<h:form>
+		<h:dataTable style="width: 100%" border="1"
+			value="#{livrosBean.livros}" var="l" rendered="#{livrosBean.livros.size() > 0}">
+			<f:facet name="header">
+				<h:outputLabel value="Lista de Livros" />
+			</f:facet>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Titulo" />
+				</f:facet>
+
+				<h:outputText value="#{l.titulo}" rendered="#{!l.edit}" />
+				<h:inputText value="#{l.titulo}" rendered="#{l.edit}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Autor" />
+				</f:facet>
+
+				<h:outputText value="#{l.autor}" rendered="#{!l.edit}" />
+				<h:inputText value="#{l.autor}" rendered="#{l.edit}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Editora" />
+				</f:facet>
+
+				<h:outputText value="#{l.editora}" rendered="#{!l.edit}" />
+				<h:inputText value="#{l.editora}" rendered="#{l.edit}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputLabel value="Numero de Páginas" />
+				</f:facet>
+
+				<h:outputText value="#{l.paginas}" rendered="#{!l.edit}" />
+				<h:inputText value="#{l.paginas}" rendered="#{l.edit}" />
+			</h:column>
+
+			<h:column>
+				<h:panelGroup rendered="#{!l.edit}">
+					<h:commandLink action="#{livrosBean.alterar(l)}" value="Alterar" />
+					|
+					<h:commandLink action="#{livrosBean.deletar(l)}" value="Deletar" />
+				</h:panelGroup>
+				
+				<h:commandLink action="#{livrosBean.gravar(l)}" value="Gravar" rendered="#{l.edit}" />
+			</h:column>
+
+
+		</h:dataTable>
+
+		<h:outputText value="Não há dados na tabela"
+			rendered="#{livrosBean.livros.size() == 0}" />
+			<br />
+		<h:commandButton value="Inserir" actionListener="#{livrosBean.inserir}" />
+
+	</h:form>
+
+</h:body>
+</html>
